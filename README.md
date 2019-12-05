@@ -84,6 +84,24 @@ https://gmlwjd9405.github.io/2018/08/28/algorithm-mst.html
 1. 벨만포드 알고리즘
 2. 다익스트라 알고리즘
 
+----------
+Sorting Algorithm (basic)
+
+![](https://paper-attachments.dropbox.com/s_045BE8BDF599E13279771AF585282B064EA037480C46167C43B1CC52F61C91A5_1565881167980_.PNG)
+
+                        막 Sorting →아주 비효율적
+                        goto → 속도저하 → 최대한 쓰지 않도록
+![](https://paper-attachments.dropbox.com/s_045BE8BDF599E13279771AF585282B064EA037480C46167C43B1CC52F61C91A5_1565883299539_.PNG)
+
+                Bubble Sorting → 좀 더 효율적
+
+
+![](https://paper-attachments.dropbox.com/s_045BE8BDF599E13279771AF585282B064EA037480C46167C43B1CC52F61C91A5_1565945189459_dfdfdfdfdf.PNG)
+
+
+Quick Sorting → 더 더 효율적
+qsort(요소들에 접근할 이름 or 주소 , 요소개수 , 요소크기 , compare)
+
 
 
 
