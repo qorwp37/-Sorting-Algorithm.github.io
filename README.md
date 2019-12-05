@@ -1,4 +1,4 @@
-C언어 및 알고리즘
+기본이 되는 알고리즘
 ----------
 <1> Dynamic Programming
 
