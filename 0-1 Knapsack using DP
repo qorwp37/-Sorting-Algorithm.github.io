@@ -1,0 +1,96 @@
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    /////////Get input informations/////////
+    int num_item;
+    printf("enter the number of items:\n");
+    scanf("%d",&num_item);
+    int *weight = malloc(sizeof(int)*(num_item+1));
+    int *benefit = malloc(sizeof(int)*(num_item+1));
+    weight[0] = 0;
+    benefit[0] = 0;
+    printf("enter the input information:\n");
+    int max_weight;
+    for(int i = 1 ; i <= num_item+1 ; i++)
+    {
+        if (i == num_item+1) scanf("%d",&max_weight);
+        else scanf("%d %d",&weight[i],&benefit[i]);
+    }
+
+
+    /////////make Benefit table/////////
+    int **b = malloc(sizeof(int *) * (max_weight+1));
+    for (int i = 0; i <= max_weight; i++)
+    {
+        b[i] = malloc(sizeof(int) * (num_item+1));
+    }
+
+    for (int w = 0 ; w <= max_weight ; w++)
+    {
+        b[w][0] = 0;
+    }
+
+    for (int i = 1 ; i <= num_item ; i++)
+    {
+        b[0][i] = 0;
+
+        for (int w = 0 ; w <= max_weight ; w++)
+        {
+            if (weight[i] > w)
+            {
+                b[w][i] = b[w][i-1];
+            }
+            else
+            {
+                if (b[w-weight[i]][i-1]+benefit[i] > b[w][i-1])
+                {
+                    b[w][i] = b[w-weight[i]][i-1]+benefit[i];
+                }
+                else b[w][i] = b[w][i-1];
+            }
+        }
+    }
+
+    /////////Backtracking/////////
+    int bw = max_weight;
+    int bi = num_item;
+    int *choose_item = malloc(sizeof(int)*num_item);
+    int index = 0;
+    while(1)
+    {
+        if(b[bw][bi-1]!=b[bw][bi])
+        {
+            choose_item[index] = bi;
+            bw = bw - weight[bi];
+            if (bw == 0) break;
+            bi = bi - 1;
+            index++;
+        }
+        else
+        {
+            bi = bi - 1;
+        }
+    }
+
+    /////////print output/////////
+    while (index >= 0)
+    {
+        printf("%d ", choose_item[index--]);
+    }
+    printf("%d", b[max_weight][num_item]);
+
+    /////////free memory/////////
+    for (int i = 0; i < max_weight; i++)
+    {
+        free(b[i]);
+    }
+
+    free(b);
+    free(weight);
+    free(benefit);
+
+    return 0;
+}
