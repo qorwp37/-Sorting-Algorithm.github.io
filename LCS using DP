@@ -1,0 +1,123 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+char * str3;
+int index = 0;
+int max(int a, int b)
+{
+    if( a > b)
+    {
+        return a;
+    }
+    else
+        return b;
+}
+int backtracking(int **memo, int i, int j)
+{
+    while(memo[i][j] != 0)
+    {
+        if(memo[i-1][j] == memo[i][j-1])
+        {
+            str3[index++] = i-1;
+            i--;
+            j--;
+        }
+        else
+        {
+            if (memo[i-1][j] > memo[i][j-1])
+            {
+                i--;
+            }
+            else
+            {
+                j--;
+            }
+        }
+    }
+    return 0;
+}
+void print(int ** memo)
+{
+    for(int i = 0 ; i < 5 ; i++)
+    {
+        for(int j = 0 ; j < 6 ; j ++)
+        {
+            printf("%d ",memo[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+void clean(int ** memo)
+{
+    for(int i = 0 ; i < 5 ; i++)
+    {
+        for(int j = 0 ; j < 6 ; j ++)
+        {
+            memo[i][j] = 0;
+        }
+    }
+}
+int lcs( char* str1, char* str2)
+{
+    int ** memo = malloc(sizeof(int*)*5);
+    for(int i = 0 ; i < 5 ; i++)
+    {
+        memo[i] = malloc(sizeof(int)*6);
+    }
+    clean(memo);
+    print(memo);
+
+    for(int i = 0 ; i < 5 ; i ++)
+    {
+        memo[i][0] = 0;
+    }
+    print(memo);
+
+    int i , j;
+    for(j = 1 ; j < 6 ; j++)
+    {
+        printf("\nj = %d\n",j);
+        for(i = 1 ; i < 5 ; i++)
+        {
+            printf("\ni = %d\n",i);
+
+            if(str1[i-1] == str2[j-1])
+            {
+                memo[i][j] = memo[i-1][j-1]+1;
+            }
+            else
+            {
+                memo[i][j] = max(memo[i-1][j], memo[i][j-1]);
+            }
+            print(memo);
+        }
+    }
+    print(memo);
+    i--;
+    j--;
+    backtracking(memo,i,j);
+    return memo[4][5];
+}
+
+int main()
+{
+    char * str1;
+    char * str2;
+    str1 = malloc(sizeof(char)*1024);
+    str2 = malloc(sizeof(char)*1024);
+    str3 = malloc(sizeof(char)*1024);
+    str1 = "ABCB";
+    str2 = "BDCAB";
+
+    printf("%d\n", lcs(str1, str2));
+    index--;
+    for(; index > -1 ; index--)
+    {
+        printf("%c",str1[str3[index]]);
+    }
+    free(str1);
+    free(str2);
+    free(str3);
+    return 0;
+}
