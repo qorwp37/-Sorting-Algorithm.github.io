@@ -85,7 +85,7 @@ https://gmlwjd9405.github.io/2018/08/28/algorithm-mst.html
 2. 다익스트라 알고리즘
 
 ----------
-Sorting Algorithm (basic)
+<6> Sorting Algorithm (basic)
 
 ![](https://paper-attachments.dropbox.com/s_045BE8BDF599E13279771AF585282B064EA037480C46167C43B1CC52F61C91A5_1565881167980_.PNG)
 
